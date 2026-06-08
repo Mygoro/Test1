@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>OTTO — Try talking like this</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,900;1,9..144,600&family=Archivo:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* ===== Poster design tokens (from exhibition-poster-master.html) ===== */
+  :root{
+    --bg:#f3f1ea; --paper:#1a1714; --accent:#c64a2e;
+    --mute:#8c8378; --rule:#cdc7ba; --panel:#dcd6c8; --body:#4a443c;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html,body{height:100%;}
+  body{
+    background:var(--bg); color:var(--paper);
+    font-family:"Archivo",system-ui,sans-serif;
+    height:100vh; width:100vw; overflow:hidden;
+    display:flex; flex-direction:column;
+    padding:clamp(14px,2.4vmin,30px);
+  }
+
+  /* ===== Top bar ===== */
+  .topbar{
+    display:flex; align-items:baseline; justify-content:space-between;
+    gap:2vmin;
+    border-bottom:1px solid var(--rule);
+    padding-bottom:clamp(8px,1.4vmin,16px);
+  }
+  .brand{display:flex; align-items:baseline; gap:clamp(8px,1.6vmin,20px);}
+  .wordmark{
+    font-family:"Fraunces",serif; font-weight:900;
+    font-size:clamp(28px,5.4vmin,64px); line-height:.8;
+    letter-spacing:-.01em; color:var(--paper);
+  }
+  .wordmark .dot{color:var(--accent);}
+  .tagline{
+    font-family:"Fraunces",serif; font-style:italic; font-weight:600;
+    font-size:clamp(15px,2.5vmin,30px); color:var(--body);
+  }
+  .lang{
+    font-size:clamp(10px,1.5vmin,16px); letter-spacing:.22em;
+    text-transform:uppercase; color:var(--accent); font-weight:600;
+    white-space:nowrap;
+  }
+
+  /* ===== Columns ===== */
+  .columns{
+    flex:1; display:flex; gap:clamp(12px,2vmin,28px);
+    padding-top:clamp(12px,2vmin,26px); min-height:0;
+  }
+  .col{flex:1; display:flex; flex-direction:column; min-width:0;}
+  .col-label{
+    font-size:clamp(11px,1.6vmin,17px); letter-spacing:.2em;
+    text-transform:uppercase; color:var(--accent); font-weight:600;
+    margin-bottom:clamp(8px,1.4vmin,16px);
+    display:flex; align-items:center; gap:.6em;
+  }
+  .col-label .sub{
+    color:var(--mute); letter-spacing:.04em; text-transform:none;
+    font-weight:500; font-size:.8em;
+  }
+  .nodes{display:flex; flex-direction:column; flex:1; min-height:0; gap:0;}
+  .nodes.spaced{justify-content:flex-start; gap:clamp(10px,1.8vmin,22px);}
+
+  /* a single chat / flow node = panel box */
+  .node{
+    background:var(--panel); color:var(--paper);
+    border-radius:clamp(8px,1.4vmin,16px);
+    padding:clamp(9px,1.7vmin,18px) clamp(11px,1.9vmin,20px);
+    font-size:clamp(14px,1.95vmin,23px); line-height:1.32;
+    font-weight:500;
+  }
+  .node .q::before{content:"“";} .node .q::after{content:"”";}
+
+  /* downward connector for multi-turn chains */
+  .arrow{
+    align-self:center; color:var(--accent);
+    font-size:clamp(13px,1.8vmin,22px); line-height:1;
+    padding:clamp(4px,0.8vmin,9px) 0;
+  }
+
+  /* ===== Footer strip ===== */
+  .footer{
+    border-top:1px solid var(--rule);
+    padding-top:clamp(8px,1.4vmin,16px);
+    margin-top:clamp(10px,1.6vmin,18px);
+    display:flex; align-items:baseline; justify-content:space-between; gap:2vmin;
+  }
+  .keepgoing{
+    font-family:"Fraunces",serif; font-weight:600;
+    font-size:clamp(14px,2.1vmin,26px); color:var(--paper);
+  }
+  .keepgoing b{color:var(--accent); font-weight:900;}
+  .handoff{
+    font-size:clamp(11px,1.6vmin,18px); color:var(--body);
+    letter-spacing:.02em; white-space:nowrap;
+  }
+  .handoff .arr{color:var(--accent); font-weight:600;}
+
+  /* ===== Responsive: portrait fallback (if the iPad is rotated) ===== */
+  @media (orientation:portrait){
+    body{overflow:auto;}
+    .columns{flex-direction:column; gap:clamp(14px,3vmin,30px);}
+    .col{flex:none;}
+    .nodes{gap:clamp(6px,1.4vmin,14px);}
+  }
+</style>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="wordmark">OTTO<span class="dot">.</span></span>
+      <span class="tagline">try talking like this</span>
+    </div>
+    <span class="lang">English only</span>
+  </header>
+
+  <main class="columns">
+
+    <!-- ===== Column 1 — ONE-SHOTS (independent starters, no arrows) ===== -->
+    <section class="col">
+      <div class="col-label">One-shots <span class="sub">— ask any one</span></div>
+      <div class="nodes spaced">
+        <div class="node"><span class="q">What's on my schedule this week?</span></div>
+        <div class="node"><span class="q">Is my driving range enough to get home?</span></div>
+        <div class="node"><span class="q">What's today's top financial news?</span></div>
+      </div>
+    </section>
+
+    <!-- ===== Column 2 — EXAM CRAM (multi-turn chain) ===== -->
+    <section class="col">
+      <div class="col-label">Exam cram <span class="sub">— it remembers</span></div>
+      <div class="nodes">
+        <div class="node"><span class="q">Do I have a final tomorrow? What's it about?</span></div>
+        <div class="arrow">&#9660;</div>
+        <div class="node"><span class="q">Give me a quick review.</span></div>
+        <div class="arrow">&#9660;</div>
+        <div class="node"><span class="q">One topic at a time.</span></div>
+      </div>
+    </section>
+
+    <!-- ===== Column 3 — PLAN MY EVENING (long multi-turn chain) ===== -->
+    <section class="col">
+      <div class="col-label">Plan my evening</div>
+      <div class="nodes">
+        <div class="node"><span class="q">How long to drive home today?</span></div>
+        <div class="arrow">&#9660;</div>
+        <div class="node"><span class="q">When's the best time to leave?</span></div>
+        <div class="arrow">&#9660;</div>
+        <div class="node"><span class="q">What should I do until then in 송도?</span></div>
+        <div class="arrow">&#9660;</div>
+        <div class="node"><span class="q">Where should I study?</span></div>
+        <div class="arrow">&#9660;</div>
+        <div class="node"><span class="q">How much is it? Any other options?</span></div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <span class="keepgoing">Keep going — ask a follow-up. <b>OTTO remembers the whole conversation.</b></span>
+    <span class="handoff"><span class="arr">&#8599;</span> Start at the QR on the poster.</span>
+  </footer>
+
+</body>
+</html>
