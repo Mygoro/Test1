@@ -63,9 +63,14 @@
     border:2px solid var(--paper); color:var(--paper); font-weight:700;
     font-size:clamp(12px,1.55vmin,19px); display:flex; align-items:center; justify-content:center;}
   .steps b{font-weight:700;}
-  .tips{align-self:stretch; text-align:left; margin-top:auto; padding-top:clamp(8px,1.3vmin,15px);
-    border-top:1px solid var(--rule);
-    font-size:clamp(11px,1.5vmin,17px); line-height:1.5; color:var(--body);}
+  /* Discord-newbie note — fills the left column's lower space */
+  .dnote{list-style:none; align-self:stretch; text-align:left;
+    display:flex; flex-direction:column; gap:clamp(5px,.9vmin,12px);}
+  .dnote li{position:relative; padding-left:clamp(16px,2vmin,25px);
+    font-size:clamp(12px,1.6vmin,20px); line-height:1.38; color:var(--body);}
+  .dnote li::before{content:"›"; position:absolute; left:0; top:-.02em;
+    color:var(--accent); font-weight:700; font-size:1.1em;}
+  .dnote b{font-weight:700; color:var(--paper);}
 
   /* ---- RIGHT examples ---- */
   .examples{flex:1; display:flex; flex-direction:column; min-width:0;}
@@ -144,6 +149,13 @@
         <li><span class="txt">Allow <b>mic access</b> when asked</span></li>
         <li><span class="txt">Say <b>“Crank&nbsp;Otto,”</b> then ask</span></li>
       </ol>
+
+      <div class="howlabel">New to Discord? <span style="font-weight:400;color:var(--body);">No app, no sign-up.</span></div>
+      <ul class="dnote">
+        <li>A page opens — tap <b>Continue in browser</b>, skip the install.</li>
+        <li>Type <b>any nickname</b> — that's the name Otto greets you by.</li>
+        <li>When it asks for your <b>microphone</b>, tap <b>Allow</b>.</li>
+      </ul>
     </section>
 
     <!-- RIGHT — what to ask -->
