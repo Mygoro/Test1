@@ -89,13 +89,25 @@
   .oneshots{display:flex; gap:clamp(8px,1.3vmin,15px);}
   .oneshots .q{flex:1;}
 
-  /* conversations: two threads side by side, each accent-connected */
-  .convos{flex:1; display:flex; gap:clamp(14px,2vmin,28px); min-height:0;
+  /* conversations: two threads side by side — sized to content (accent line is cut, not stretched) */
+  .convos{display:flex; gap:clamp(14px,2vmin,28px);
     margin-top:clamp(12px,1.9vmin,22px);}
   .thread{flex:1; display:flex; flex-direction:column; min-width:0;}
-  .thread .turns{flex:1; display:flex; flex-direction:column; gap:clamp(7px,1.1vmin,13px);
+  .thread .turns{display:flex; flex-direction:column; gap:clamp(7px,1.1vmin,13px);
     border-left:3px solid var(--accent); padding-left:clamp(11px,1.6vmin,20px);}
   .thread .turns .q{border-left:3px solid var(--accent);}
+
+  /* help — a proper panel in the lower-right empty space */
+  .help{margin-top:auto; background:var(--panel); border:1px solid var(--rule);
+    border-radius:clamp(10px,1.4vmin,18px); padding:clamp(13px,1.9vmin,24px) clamp(15px,2.1vmin,26px);}
+  .help-title{font-family:var(--serif); font-weight:600; color:var(--accent);
+    font-size:clamp(16px,2.1vmin,27px); margin-bottom:clamp(8px,1.2vmin,15px);}
+  .help-list{list-style:none; display:flex; flex-direction:column; gap:clamp(6px,1vmin,13px);}
+  .help-list li{position:relative; padding-left:clamp(18px,2.2vmin,28px);
+    font-size:clamp(14px,1.8vmin,22px); line-height:1.4; color:var(--paper);}
+  .help-list li::before{content:"›"; position:absolute; left:0; top:-.04em;
+    color:var(--accent); font-weight:700; font-size:1.15em;}
+  .help-list b{font-weight:700;}
 
   /* ===== Footer ===== */
   .footer{border-top:1px solid var(--rule); padding-top:clamp(8px,1.3vmin,15px);
@@ -127,16 +139,11 @@
 
       <div class="howlabel">How to talk</div>
       <ol class="steps">
-        <li>Read the <b>#welcome</b> channel first</li>
-        <li>Join the <b>“MEET OTTO”</b> voice channel — one at a time</li>
-        <li>Allow <b>mic access</b> when asked</li>
-        <li>Say <b>“Crank&nbsp;Otto,”</b> then ask</li>
+        <li><span class="txt">Read the <b>#welcome</b> channel first</span></li>
+        <li><span class="txt">Join the <b>“MEET OTTO”</b> voice channel — one at a time</span></li>
+        <li><span class="txt">Allow <b>mic access</b> when asked</span></li>
+        <li><span class="txt">Say <b>“Crank&nbsp;Otto,”</b> then ask</span></li>
       </ol>
-      <div class="tips">
-        Not catching? Say it 2–3 times, clearly. &nbsp;·&nbsp;
-        It keeps listening — just keep talking. &nbsp;·&nbsp;
-        Quiet too long? Say “Crank Otto” again.
-      </div>
     </section>
 
     <!-- RIGHT — what to ask -->
@@ -152,7 +159,7 @@
 
       <div class="convos">
         <div class="thread">
-          <div class="group-label">Exam cram <span class="n">· OTTO remembers</span></div>
+          <div class="group-label">Review for my exam</div>
           <div class="turns">
             <div class="q"><span class="t">Do I have a final tomorrow? What's it about?</span></div>
             <div class="q"><span class="t">Give me a quick review.</span></div>
@@ -160,13 +167,22 @@
           </div>
         </div>
         <div class="thread">
-          <div class="group-label">Plan my evening <span class="n">· OTTO remembers</span></div>
+          <div class="group-label">Plan my evening</div>
           <div class="turns">
             <div class="q"><span class="t">How long to drive home today?</span></div>
             <div class="q"><span class="t">When's the best time to leave?</span></div>
             <div class="q"><span class="t">Where should I study until then?</span></div>
           </div>
         </div>
+      </div>
+
+      <div class="help">
+        <div class="help-title">Not catching Otto?</div>
+        <ul class="help-list">
+          <li>Say <b>“Crank Otto”</b> 2–3 times, clearly — the first try often misses.</li>
+          <li>It keeps listening — just keep talking, no need to repeat the wake word.</li>
+          <li>Quiet too long? Say <b>“Crank Otto”</b> again to wake it.</li>
+        </ul>
       </div>
     </section>
 
