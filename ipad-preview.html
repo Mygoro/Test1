@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="OTTO">
+<title>OTTO — Scan & talk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,900;1,9..144,600&family=Archivo:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f3f1ea; --paper:#1a1714; --accent:#c64a2e;
+    --mute:#6f675c;            /* darkened for contrast (#5) */
+    --rule:#cdc7ba; --panel:#e7e1d4; --body:#4a443c;
+    --serif:"Fraunces",Georgia,"Times New Roman",serif;
+    --sans:"Archivo",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html,body{height:100%;}
+  body{
+    background:var(--bg); color:var(--paper); font-family:var(--sans);
+    min-height:100vh; width:100vw; overflow:auto;          /* (#2) 무음 잘림 방지 */
+    display:flex; flex-direction:column;
+    padding:clamp(16px,2.6vmin,34px);
+  }
+
+  /* ===== Top bar ===== */
+  .topbar{display:flex; align-items:baseline; justify-content:space-between;
+    border-bottom:1px solid var(--rule); padding-bottom:clamp(8px,1.3vmin,16px);}
+  .wordmark{font-family:var(--serif); font-weight:900;
+    font-size:clamp(34px,5.6vmin,68px); line-height:.8; letter-spacing:-.01em;}
+  .wordmark .dot{color:var(--accent);}                      /* accent #1 */
+  .lang{font-size:clamp(13px,1.8vmin,21px); letter-spacing:.22em; text-transform:uppercase;
+    color:var(--body); font-weight:600; white-space:nowrap;}
+
+  /* ===== Main split: ENTRY (left, dominant) | EXAMPLES (right) ===== */
+  .main{flex:1; display:flex; gap:clamp(20px,3vmin,44px); padding-top:clamp(14px,2vmin,26px);
+    min-height:0;}
+
+  /* ---- LEFT: the real entry path (#1) ---- */
+  .entry{flex:0 0 37%; display:flex; flex-direction:column; align-items:center;
+    background:var(--panel); border:1px solid var(--rule); border-radius:clamp(12px,1.6vmin,20px);
+    padding:clamp(16px,2.4vmin,30px); text-align:center;}
+  .qr{width:clamp(150px,26vmin,300px); height:clamp(150px,26vmin,300px);
+    background:#fff; border-radius:clamp(8px,1.2vmin,14px); padding:clamp(6px,1vmin,12px);
+    object-fit:contain; box-shadow:0 2px 10px rgba(26,23,20,.12);}
+  .qr-cap{font-family:var(--serif); font-weight:900; color:var(--accent);  /* accent #2 (CTA) */
+    font-size:clamp(20px,2.8vmin,36px); margin-top:clamp(8px,1.3vmin,16px); line-height:1.05;}
+  .qr-sub{color:var(--body); font-size:clamp(13px,1.75vmin,21px); margin-top:clamp(3px,.5vmin,7px);}
+  .qr-sub b{font-weight:600; color:var(--paper);}
+  .howlabel{font-family:var(--serif); font-weight:600; font-size:clamp(16px,2.1vmin,26px);
+    margin:clamp(14px,2.2vmin,26px) 0 clamp(8px,1.3vmin,15px); align-self:stretch; text-align:left;
+    border-top:1px solid var(--rule); padding-top:clamp(12px,1.8vmin,20px);}
+  .steps{list-style:none; counter-reset:s; display:flex; flex-direction:column;
+    gap:clamp(8px,1.4vmin,16px); align-self:stretch;}
+  .steps li{counter-increment:s; position:relative; padding-left:clamp(34px,4.4vmin,52px);
+    font-size:clamp(15px,2.05vmin,25px); line-height:1.3; text-align:left;
+    display:flex; align-items:center; min-height:clamp(26px,3.4vmin,42px);}
+  .steps li::before{content:counter(s); position:absolute; left:0; top:50%; transform:translateY(-50%);
+    width:clamp(24px,3.1vmin,38px); height:clamp(24px,3.1vmin,38px); border-radius:50%;
+    border:2px solid var(--paper); color:var(--paper); font-weight:700;
+    font-size:clamp(13px,1.7vmin,21px); display:flex; align-items:center; justify-content:center;}
+  .steps b{font-weight:700;}
+  .tips{align-self:stretch; text-align:left; margin-top:clamp(10px,1.6vmin,18px);
+    border-top:1px solid var(--rule); padding-top:clamp(8px,1.3vmin,14px);
+    font-size:clamp(12px,1.6vmin,18px); line-height:1.45; color:var(--body);}
+
+  /* ---- RIGHT: examples (supporting) ---- */
+  .examples{flex:1; display:flex; flex-direction:column; min-width:0;}
+  .ex-head{font-family:var(--serif); font-weight:600; font-size:clamp(17px,2.3vmin,28px);
+    margin-bottom:clamp(10px,1.6vmin,18px);}
+  .ex-head .who{color:var(--body); font-weight:500; font-size:.74em;}
+  .ex-groups{flex:1; display:flex; flex-direction:column; gap:clamp(14px,2.2vmin,26px); min-height:0;}
+  .group-label{font-size:clamp(12px,1.6vmin,18px); letter-spacing:.16em; text-transform:uppercase;
+    color:var(--accent); font-weight:600; margin-bottom:clamp(7px,1.1vmin,13px);}  /* accent #3 */
+  .group-label .n{color:var(--mute); letter-spacing:.02em; text-transform:none; font-weight:500;}
+
+  /* a question = quote block (not a button) (#4,#10) */
+  .q{background:var(--bg); border:1px solid var(--rule); border-left:4px solid var(--rule);
+    border-radius:8px; box-shadow:0 1px 4px rgba(26,23,20,.06);
+    padding:clamp(9px,1.5vmin,17px) clamp(12px,1.7vmin,18px);
+    font-size:clamp(15px,2.05vmin,25px); line-height:1.3; color:var(--paper);}
+  .q::before{content:"“";} .q::after{content:"”";}
+
+  /* one-shots: separate cards, even spacing */
+  .oneshots{display:flex; flex-direction:column; gap:clamp(8px,1.3vmin,15px);}
+
+  /* conversation: a connected thread (#6) */
+  .thread{border-left:3px solid var(--accent); padding-left:clamp(12px,1.8vmin,22px);
+    display:flex; flex-direction:column; gap:clamp(7px,1.2vmin,14px);}
+  .thread .q{border-left-color:var(--accent);}
+  .thread .turn{display:flex; align-items:flex-start; gap:clamp(7px,1.1vmin,12px);}
+  .thread .turn .lead{font-family:var(--serif); font-weight:700; color:var(--accent);
+    font-size:clamp(15px,2vmin,24px); line-height:1.4; flex:0 0 auto; min-width:1.4em;}
+  .thread .turn .q{flex:1;}
+
+  /* ===== Footer ===== */
+  .footer{border-top:1px solid var(--rule); padding-top:clamp(9px,1.4vmin,16px);
+    margin-top:clamp(12px,1.8vmin,20px);
+    display:flex; align-items:baseline; justify-content:space-between; gap:2vmin;}
+  .keepgoing{font-family:var(--serif); font-weight:600; font-size:clamp(15px,2vmin,26px);}
+  .privacy{font-size:clamp(12px,1.55vmin,18px); color:var(--mute); white-space:nowrap;}
+
+  /* ===== Responsive: portrait → QR/entry on top (#10) ===== */
+  @media (orientation:portrait){
+    .main{flex-direction:column;}
+    .entry{flex:none;}
+  }
+</style>
+</head>
+<body>
+
+  <header class="topbar">
+    <span class="wordmark">OTTO<span class="dot">.</span></span>
+    <span class="lang">English only</span>
+  </header>
+
+  <main class="main">
+
+    <!-- LEFT — the entry path (dominant) -->
+    <section class="entry">
+      <img class="qr" src="otto_qr.png" alt="Discord QR">
+      <div class="qr-cap">Scan to join</div>
+      <div class="qr-sub">the <b>“MEET OTTO”</b> voice channel</div>
+
+      <div class="howlabel">How to talk</div>
+      <ol class="steps">
+        <li>Join the <b>voice channel</b> — one at a time</li>
+        <li>Allow <b>mic access</b> when asked</li>
+        <li>Say <b>“Crank&nbsp;Otto,”</b> then ask</li>
+      </ol>
+      <div class="tips">
+        Not catching? Say it 2–3 times, clearly. &nbsp;·&nbsp;
+        It keeps listening — just keep talking. &nbsp;·&nbsp;
+        Quiet too long? Say “Crank Otto” again.
+      </div>
+    </section>
+
+    <!-- RIGHT — what to ask (supporting) -->
+    <section class="examples">
+      <div class="ex-head">Try asking <span class="who">— you're ROY, mid finals week</span></div>
+
+      <div class="ex-groups">
+        <div>
+          <div class="group-label">Quick questions <span class="n">· ask any one</span></div>
+          <div class="oneshots">
+            <div class="q">What's on my schedule this week?</div>
+            <div class="q">Is my driving range enough to get home?</div>
+            <div class="q">What's today's top financial news?</div>
+          </div>
+        </div>
+
+        <div>
+          <div class="group-label">Or have a conversation <span class="n">· OTTO remembers</span></div>
+          <div class="thread">
+            <div class="turn"><span class="lead">You</span><span class="q">Do I have a final tomorrow? What's it about?</span></div>
+            <div class="turn"><span class="lead">↳</span><span class="q">Give me a quick review.</span></div>
+            <div class="turn"><span class="lead">↳</span><span class="q">One topic at a time.</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <span class="keepgoing">Keep going — ask a follow-up. OTTO remembers the conversation.</span>
+    <span class="privacy">Voice isn't stored · schedule &amp; notes are fictional demo data</span>
+  </footer>
+
+  <!-- 10분 자동 새로고침(검증 완료). 폰트는 브라우저 캐시라 재로드 시 FOUT 거의 없음. 부스 확정 시 제거 가능. -->
+  <script>setTimeout(function(){ location.reload(); }, 600000);</script>
+
+</body>
+</html>
