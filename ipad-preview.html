@@ -103,8 +103,23 @@
     border-left:3px solid var(--accent); padding-left:clamp(11px,1.6vmin,20px);}
   .thread .turns .q{border-left:3px solid var(--accent);}
 
-  /* help — a proper panel in the lower-right empty space */
-  .help{margin-top:auto; background:var(--panel); border:1px solid var(--rule);
+  /* data sources — "what OTTO draws on"; this + help fill the lower-right */
+  .sources{margin-top:auto;}
+  .src-label{font-size:clamp(11px,1.5vmin,17px); letter-spacing:.16em; text-transform:uppercase;
+    color:var(--accent); font-weight:600; margin-bottom:clamp(6px,.95vmin,12px);}
+  .src-row{display:flex; gap:clamp(7px,1.1vmin,14px);}
+  .src{flex:1; min-width:0; display:flex; flex-direction:column; justify-content:center;
+    background:var(--bg); border:1px solid var(--rule); border-radius:8px;
+    box-shadow:0 1px 4px rgba(26,23,20,.06);
+    padding:clamp(7px,1.1vmin,14px) clamp(8px,1.2vmin,15px);
+    min-height:clamp(48px,6.6vmin,84px);}
+  .src-name{font-family:var(--serif); font-weight:600; color:var(--paper);
+    font-size:clamp(12px,1.6vmin,20px); line-height:1.1;}
+  .src-eg{color:var(--body); font-size:clamp(10px,1.35vmin,16px); line-height:1.28;
+    margin-top:clamp(2px,.4vmin,5px);}
+
+  /* help — Not catching Otto? (sits just under the data strip) */
+  .help{margin-top:clamp(12px,1.8vmin,22px); background:var(--panel); border:1px solid var(--rule);
     border-radius:clamp(10px,1.4vmin,18px); padding:clamp(13px,1.9vmin,24px) clamp(15px,2.1vmin,26px);}
   .help-title{font-family:var(--serif); font-weight:600; color:var(--accent);
     font-size:clamp(16px,2.1vmin,27px); margin-bottom:clamp(8px,1.2vmin,15px);}
@@ -192,6 +207,17 @@
         </div>
       </div>
      </div><!-- /.ex-top -->
+
+      <div class="sources">
+        <div class="src-label">The data behind Roy's week</div>
+        <div class="src-row">
+          <div class="src"><div class="src-name">Persona</div><div class="src-eg">CTM senior · drives · finals week</div></div>
+          <div class="src"><div class="src-name">Google Calendar</div><div class="src-eg">Stats final — Thu 12:00</div></div>
+          <div class="src"><div class="src-name">Notion</div><div class="src-eg">Exam scope · quick memos</div></div>
+          <div class="src"><div class="src-name">Kakao Maps</div><div class="src-eg">Live + predicted traffic</div></div>
+          <div class="src"><div class="src-name">Hyundai API</div><div class="src-eg">Live driving range</div></div>
+        </div>
+      </div>
 
       <div class="help">
         <div class="help-title">Not catching Otto?</div>
