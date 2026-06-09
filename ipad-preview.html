@@ -74,12 +74,11 @@
 
   /* ---- RIGHT examples ---- */
   .examples{flex:1; display:flex; flex-direction:column; min-width:0;}
-  /* upper region spreads its blocks evenly so they don't cluster at the top */
-  .ex-top{flex:1; display:flex; flex-direction:column; justify-content:space-evenly;
-    gap:clamp(12px,1.8vmin,22px); padding-bottom:clamp(12px,1.8vmin,22px);}
-  .ex-head{font-family:var(--serif); font-weight:600; font-size:clamp(16px,2.2vmin,27px);
-    margin-bottom:clamp(9px,1.4vmin,16px);}
-  .ex-head .who{color:var(--body); font-weight:500; font-size:.72em;}
+  /* upper region — top-aligned, starts on the same line as the left panel's top */
+  .ex-top{display:flex; flex-direction:column;}
+  .ex-head{font-family:var(--serif); font-weight:600; font-size:clamp(20px,3vmin,40px);
+    line-height:1.05; margin-bottom:clamp(8px,1.2vmin,15px);}
+  .ex-head .who{color:var(--body); font-weight:500; font-size:.6em;}
   .group-label{font-size:clamp(11px,1.5vmin,17px); letter-spacing:.16em; text-transform:uppercase;
     color:var(--accent); font-weight:600; margin-bottom:clamp(6px,.95vmin,12px);}
   .group-label .n{color:var(--mute); letter-spacing:.02em; text-transform:none; font-weight:500;}
@@ -98,14 +97,14 @@
   .oneshots .q{flex:1;}
 
   /* conversations: two threads side by side — sized to content (accent line is cut, not stretched) */
-  .convos{display:flex; gap:clamp(14px,2vmin,28px);}
+  .convos{display:flex; gap:clamp(14px,2vmin,28px); margin-top:clamp(16px,2.4vmin,32px);}
   .thread{flex:1; display:flex; flex-direction:column; min-width:0;}
   .thread .turns{display:flex; flex-direction:column; gap:clamp(7px,1.1vmin,13px);
     border-left:3px solid var(--accent); padding-left:clamp(11px,1.6vmin,20px);}
   .thread .turns .q{border-left:3px solid var(--accent);}
 
   /* help — a proper panel in the lower-right empty space */
-  .help{background:var(--panel); border:1px solid var(--rule);
+  .help{margin-top:auto; background:var(--panel); border:1px solid var(--rule);
     border-radius:clamp(10px,1.4vmin,18px); padding:clamp(13px,1.9vmin,24px) clamp(15px,2.1vmin,26px);}
   .help-title{font-family:var(--serif); font-weight:600; color:var(--accent);
     font-size:clamp(16px,2.1vmin,27px); margin-bottom:clamp(8px,1.2vmin,15px);}
