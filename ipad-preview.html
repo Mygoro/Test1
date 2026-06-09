@@ -74,6 +74,9 @@
 
   /* ---- RIGHT examples ---- */
   .examples{flex:1; display:flex; flex-direction:column; min-width:0;}
+  /* upper region spreads its blocks evenly so they don't cluster at the top */
+  .ex-top{flex:1; display:flex; flex-direction:column; justify-content:space-evenly;
+    gap:clamp(12px,1.8vmin,22px); padding-bottom:clamp(12px,1.8vmin,22px);}
   .ex-head{font-family:var(--serif); font-weight:600; font-size:clamp(16px,2.2vmin,27px);
     margin-bottom:clamp(9px,1.4vmin,16px);}
   .ex-head .who{color:var(--body); font-weight:500; font-size:.72em;}
@@ -95,15 +98,14 @@
   .oneshots .q{flex:1;}
 
   /* conversations: two threads side by side — sized to content (accent line is cut, not stretched) */
-  .convos{display:flex; gap:clamp(14px,2vmin,28px);
-    margin-top:clamp(12px,1.9vmin,22px);}
+  .convos{display:flex; gap:clamp(14px,2vmin,28px);}
   .thread{flex:1; display:flex; flex-direction:column; min-width:0;}
   .thread .turns{display:flex; flex-direction:column; gap:clamp(7px,1.1vmin,13px);
     border-left:3px solid var(--accent); padding-left:clamp(11px,1.6vmin,20px);}
   .thread .turns .q{border-left:3px solid var(--accent);}
 
   /* help — a proper panel in the lower-right empty space */
-  .help{margin-top:auto; background:var(--panel); border:1px solid var(--rule);
+  .help{background:var(--panel); border:1px solid var(--rule);
     border-radius:clamp(10px,1.4vmin,18px); padding:clamp(13px,1.9vmin,24px) clamp(15px,2.1vmin,26px);}
   .help-title{font-family:var(--serif); font-weight:600; color:var(--accent);
     font-size:clamp(16px,2.1vmin,27px); margin-bottom:clamp(8px,1.2vmin,15px);}
@@ -160,13 +162,16 @@
 
     <!-- RIGHT — what to ask -->
     <section class="examples">
+     <div class="ex-top">
       <div class="ex-head">Try asking <span class="who">— Otto's loaded with a demo student's finals week</span></div>
 
-      <div class="group-label">Quick questions <span class="n">· ask any one</span></div>
-      <div class="oneshots">
-        <div class="q"><span class="t">What's on my schedule this week?</span></div>
-        <div class="q"><span class="t">Is my driving range enough to get home?</span></div>
-        <div class="q"><span class="t">What's today's top financial news?</span></div>
+      <div class="qblock">
+        <div class="group-label">Quick questions <span class="n">· ask any one</span></div>
+        <div class="oneshots">
+          <div class="q"><span class="t">What's on my schedule this week?</span></div>
+          <div class="q"><span class="t">Is my driving range enough to get home?</span></div>
+          <div class="q"><span class="t">What's today's top financial news?</span></div>
+        </div>
       </div>
 
       <div class="convos">
@@ -187,6 +192,7 @@
           </div>
         </div>
       </div>
+     </div><!-- /.ex-top -->
 
       <div class="help">
         <div class="help-title">Not catching Otto?</div>
